@@ -28,3 +28,15 @@ CODIGO PARA RECIBIR RESPUESTA DEL SERVLET EN EL JSP
 
 <%=(request.getAttribute("mensaje")!=null?request.getAttribute("mensaje"):"")%>
 
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String nombre=request.getParameter("nombre");
+        Categoria c =new Categoria();
+        c.setNombre(nombre);
+        if(CategoriaDao.registrar(c)){
+            request.setAttribute("mensaje", "La categoria fue registrada.");
+        } else {
+            request.setAttribute("mensaje", "La categoria NO fue registrada.");
+        }
+        request.getRequestDispatcher("registroCategoria.jsp").forward(request, response);
+    }
