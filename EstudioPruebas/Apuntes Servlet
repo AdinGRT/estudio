@@ -1,0 +1,23 @@
+PASOS PARA CREAR UN SERVLET
+
+0. Para llamar a un Servlet se hace a traves de un formulario con el atributo action
+	<form name="nameform" action="/ServletName" method="post">
+		TextoTal: <input type="text" name="talcosa"/>		<%--El atributo name es lo que se envia como parametro al Servlet -->
+		Usuario: <input type="text" name="usuario"/>
+		<br/>
+		Password: <input type="password" name="password"/>	
+		<br/>
+		<input type="submit" value="Enviar" />		Al presinar el boton se envia el formulario
+	</form>
+
+1. Crear clases Servlet
+	Poner la anotacion
+	@WebServlet("/ServletName")
+	Hacer extends HttpServlet
+	Sobreescribir metodos, doPost, doGet
+	Reciben los parametros HttpServletRequest y HttpServletResponse
+
+2. Recuperar datos del formulario
+	String variable = request.getParameter("el atributo name");
+	
+	

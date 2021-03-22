@@ -1,0 +1,16 @@
+Define atributo Connection conexionTransaccional a la clase DAO
+Agregar un constructor vacio
+Agregar un constructor con el atributo conexionTransaccional
+
+Agregar condicional con operador ternario a la conexion de cada uno de los metodos
+Quitar las excepciones de los metodos insertar, actualizar y eliminar. Solo reportarlas
+Agregar condicional al cierre de la conexion en finally
+
+Testear con los metodos que cambien el estado de la base de datos
+La conexion se declara afuera del bloque try pero se instancia adentro
+Evaluar el estado de AutoCommit y dejarlo en false
+Si hay error hacer rollback, en el bloque catch
+si todo sale bien hacer commit, en el bloque try
+
+Probar provocando un fallo
+Probar sin fallos

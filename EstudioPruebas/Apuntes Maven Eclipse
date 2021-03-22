@@ -1,0 +1,13 @@
+CREAR PROYECTO MAVEN CON ECLIPSE
+
+1. Nuevo Maven Project
+2. Buscar el Archetype con Artifact Id maven-archetype-webapp
+3. Especificar Group Id, Arifact Id, etc.
+4. Abrir pom.xml cambiar la version de java en properties
+5. En pom.xml agregar dependencias de servlet groupId>javax.servlet, artifactId>javax.servlet-api, version>4.0.1, scope>provided
+6. Hacer build path. Click derecho en el proyecto > Build Path > Configure Build Path
+
+APLICACION WEB CON CONEXION A BASE DE DATOS
+
+7. En pom.xml agregar dependencias de base de datos. Oracle11g JDBC. groupId>com.oracle.database.jdbc, arifactId>ojdbc6, version>11.2.0.4
+

@@ -1,0 +1,102 @@
+CREAR INDICES
+
+CREATE INDEX tabla_nombre_campo_idx
+ON tabla(campo);
+
+
+RESTRICCIONES
+
+NOT NULL -> Asegura que un campo no se debe dejar vacio
+UNIQUE -> Asegura que una fila para cada columna tenga un valor unico
+PRIMARY KEY -> Combinacion de NOT NULL y UNIQUE asegura que una columna o la combinacion de dos o mas columnas tiene una identidad unica, que ayuda a buscar un particular registro en la tabla de manera mas rapida y sencilla.
+FOREIGN KEY -> Asegura la integridad referencial para que coincidad los datos en otra tabla.
+CHECK -> Asegura que el valor en una columna cumple una condicion especifica.
+DEFAULT -> Especifica un valor por default en alguna columna cuando no se especifico o ingreso el valor.
+
+
+AGREGAR RESTRICCIONES DESPUES DE CREAR LA TABLA
+
+ALTER TABLE personas
+ADD UNIQUE(persona_id);
+
+Para poner nombre a la restriccion se usa CONSTRAINT
+
+ALTER TABLE personas
+ADD CONSTRAINT unique_person_id UNIQUE(person_id);
+
+
+RESTRICCION DE LLAVE PRIMARIA
+
+La llave primaria identifica de maner univoca cada registro.
+
+
+CONVENCION LLAVE FORANEA
+
+fk_[nombre_tabla_quetiene_llaveforanea]_[nombretabla_quetiene_llaveprimaria]_[nombrecampoforaneo]
+
+
+LAS RESTRICCIONES SE PUEDEN COLOCAR INMEDIATEMENTE DESPUES DE LOS CAMPOS
+TAMBIEN LA DE PRIMARY KEY SE PUEDE AL FINAL DE LOS CAMPOS DE ESTA FORMA. CONSTRAINT tabla_pk PRIMARY KEY (campo)
+O DESPUES CON UN ALTER TABLE. ALTER TABLE tabla ADD CONSTRAINT tabla_pk PRIMARY KEY(campo);
+
+
+Eliminar una restriccion
+ALTER TABLE tabla
+DROP PRIMARY KEY;
+
+ALTER TABLE tabla
+DROP CONSTRAINT nombre_constraint;
+
+
+CHECK(condicion)
+
+DEFAULT 'valor';
+
+ALTER TABLE tabla
+MODIFY city DEFAULT 'valor';
+
+ALTER TABLE tabla
+ALTER COLUMN city DROP DEFAULT;
+
+
+
+SECUENCIAS: Es un objeto de la base de datos creado por el usuario que puede se compartido por multiples usuario para generar numeros enteros, se puede generar valores unicos o reciclarlas para obtener los mismos numeros, un uso tipico es para crear los valores de llave primaria que deben ser unicos para cada fila. Es generada e incrementada por una rutina intera de oracle.
+
+SINTAXIS
+CREATE SEQUENCE sequence
+	[INCREMENT BY n]
+	[START WITH n]
+	[{MAXVALUE n} | NOMAXVALUE]
+	[{MINVALUE n} | NOMINVALUE]
+	[{CYCLE} | NO CYCLE] -- lo que hara es que cuando llegue al limite repite el primer valor
+	[{CACHE} | NO CACHE] -- se van a precalcular valores de secuencia para que el uso tenga mejor rendimiento
+
+Ej. 
+
+CREATE SEQUENCE mi_secuencia
+	INCREMENT BY 10
+	START WITH 120
+	MAXVALUE 9999
+	NOCACHE
+	NOCYCLE;
+
+-- NEXTVAL -- Siguiente valor
+-- CURRVAL -- Actual valor
+
+CREATE TABLE tabla_ejemplo(
+	id NUMBER PRIMARY KEY,
+	campotal NUMBER
+);
+
+INSERT INTO tabla_ejemplo VALUES (mi_secuencia.NEXTVAL, valor);
+
+
+MODIFICAR SECUENCIA CAMBIAR CREATE POR ALTER, solo afectara a valores futuros.
+ELIMINAR SECUENCIA. DROP SEQUENCE mi_sequencia;
+
+
+
+CREAR ESQUEMA
+
+
+

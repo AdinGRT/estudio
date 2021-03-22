@@ -1,0 +1,52 @@
+Pasos java web con jsp
+
+1. Eliminar index.html y crear index.jsp.
+2. Crear paquetes de dao, model y controller.
+3. Crear la clase conexion utilizar DriverManager.
+4. Crear los modelos, definir en el lenguaje de programacion las tablas que tengo en la bd.
+5. Crear las clases de acceso a datos con metodos CRUD.
+6. Crear vistas.
+7. Crear los Servlet
+
+PASOS PARA CREAR UN SERVLET
+
+a. Para llamar a un Servlet se hace a traves de un formulario con el atributo action
+	<form name="nameform" action="/ServletName" method="post">
+		TextoTal: <input type="text" name="talcosa"/>		<%--El atributo name es lo que se envia como parametro al Servlet -->
+		Usuario: <input type="text" name="usuario"/>
+		<br/>
+		Password: <input type="password" name="password"/>	
+		<br/>
+		<input type="submit" value="Enviar" />		Al presinar el boton se envia el formulario
+	</form>
+
+b. Crear clases Servlet
+	Convertir clase en Servlet indicando el path
+	@WebServlet("/ServletName")
+	hacer extends de HttpServlet
+	Sobreescribir metodos doGet, doPost
+	Reciben los parametros HttpServletRequest y HttpServletResponse
+
+c. Recuperar datos del formulario
+	String variable = request.getParameter("el atributo name");
+
+
+8. EL INDEX.JSP DEBERA REDIRIGIR AL SERVLET CON LA SIGUIENTE
+	<meta http-equiv="refresh" content="0;url=${pageContext.request.contextPath}/ServletVenta">
+	
+9. EL SERVLET RECIBE LA PETICION HECHA POR EL INDEX.JSP EN EL METODO DOGET, HACER REDIRECCIONAMIENTO AL JSP DESEADO
+
+10. Hacer los metodos respectivos en el servlet. El primero es el de listado. Se envia por doGet
+	ALTERNATIVA HACER DIRECTAMENTE EN EL JSP EL LISTADO CON EXPRESSIONS
+
+11. Usar en el jsp los tag librarys
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+	ALTERNATIVA USAR EXPRESSIONS
+	Debe cerrrarse en la misma linea
+	<%= codigo java %>
+	codigo html
+	<%= codigo java %>
+
+12. 

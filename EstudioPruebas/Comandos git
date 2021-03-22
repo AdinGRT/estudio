@@ -1,0 +1,46 @@
+Instalar Git en Ubuntu
+
+Abrir Terminal:
+1. Paquete apt
+   sudo apt install git
+
+Comandos Git
+
+
+Nueva Rama
+git branch nombre_rama
+
+Mostrar logs y ramas
+git log --oneline --decorate --all --graph
+
+Cambiar el HEAD de rama
+git checkout nombre_rama
+
+Unir ramas a la rama master (estando en rama master)
+git merge nombre_rama
+
+Eliminar rama
+git branch -d nombre_rama
+
+Crear rama y cambiar el head a la misma de una vez
+git checkout -b nombre_rama
+
+Merge con conflictos resolver manualmente editando el archivo en conflicto con el resultado final
+
+Etiquetas para nombrar versionamiento
+git tag nombre_etiqueta
+
+Mostrar etiqueta actual
+git tag
+
+Eliminar etiqueta
+git tag -d nombre_etiqueta
+
+Agregar mensaje detalles a etiqueta
+git tag -a nombre_etiqueta -m 'mensaje'
+
+Mostrar detalle contenido hasta el ultimo commit de la etiqueta
+git show nombre_etiqueta
+
+Agregar etiqueta en un commit especifico. Obtener el identificador del commit con el git log --oneline --decorate --all --graph, luego
+git tag nombre_etiqueta id_commit -m 'mensaje'

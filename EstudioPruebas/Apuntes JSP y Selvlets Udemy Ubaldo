@@ -1,0 +1,22 @@
+CREAR SERVLET
+
+Convertir clase en Servlet indicando el path
+
+@WebServlet("/ServletName")
+
+hacer extends de HttpServlet
+
+Sobreescribir metodos doGet, doPost
+
+
+Utilizar libreri JSTL core
+Directiva TagLib
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+Iterar un array list en JSP
+<ul>
+    <c:ForEach var="cliente" items="${clientes}">
+        <li>${cliente.idCliente} ..lo mismo con lo que deseemos mostrar..</li>
+    </c:ForEach>
+</ul>
+

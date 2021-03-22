@@ -1,0 +1,34 @@
+Apuntes Wildfly
+
+iniciar  
+   sudo bash /opt/wildfly.etc/bin/standalone.sh
+
+agregar usuario
+   sudo bash /opt/wildfly.etc/bin/add-user.sh
+
+
+Usuario creado: adingrt
+Contrasenia: Nehe3005&
+
+Group user: admin
+
+To represent the user add the following to the server-identities definition <secret value="TmVoZTMwMDUm" />
+
+
+AGREGAR WILDFLY A LAS VARIABLES DE ENTORNO
+
+Ir a la ruta de wildfly/bin
+En la ruta escribir el comando
+   pwd >> /etc/profile
+
+Luego
+   nano /etc/profile
+
+Ahi copiar lo siguiente al final
+   export wildfly=/opt/wildfly-23.0.0.Final/bin
+   export PATH=$PATH:$wildfly
+
+Guardar, luego
+   source /etc/profile
+
+Reiniciar

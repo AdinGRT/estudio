@@ -1,0 +1,353 @@
+/*1. Mostrar los columnas de jobs donde el salario minimo es mayor que 10000 */
+SELECT * FROM jobs
+WHERE min_salary > 1000;
+
+/*2. Mostrar first_name y hire_date de los empleados que ingresaron entre 2002 y 2005*/
+SELECT first_name, hire_date
+FROM employees
+WHERE TO_CHAR(hire_date, 'YYYY') >= 2002 AND TO_CHAR(hire_date, 'YYYY') <= 2005
+ORDER BY 2;
+-- WHERE TO_CHAR(hire_date, 'YYYY') BETWEEN 2002 AND 2005
+
+/*3. Mostrar first_name y hire_date de los empleados que son IT Programmer o Sales Manager*/
+SELECT first_name, hire_date
+FROM employees
+WHERE job_id = 'IT_PROG' OR job_id = 'SA_MAN';
+--WHERE job_id IN('IT_PROG', 'SA_MAN');
+
+/*4. Mostrar empleados que ingresaron despues del 1 de enero de 2008*/
+SELECT first_name || ' ' || last_name AS NOMBRE
+--SELEC * FROM
+FROM employees
+WHERE hire_date > '01-JAN-08';
+
+/*5. Mostrar los detalles de los empleados con id 150 o 160*/
+SELECT *
+FROM employees
+-- WHERE employee_id IN(150, 160)
+WHERE employee_id = 150 OR employee_id = 160;
+
+/*6. Mostrar first_name, salary, commission_pct y hire_date de los empleados con salario menor a 10000*/
+SELECT first_name, salary, commission_pct, hire_date
+FROM employees
+WHERE salary < 10000;
+
+/*7. Mostrar job_tittle, la diferencia entre el salario minimo y maximo para los jobs con max_salary en el rango de 10000 a 20000*/
+SELECT job_title, max_salary - min_salary AS DIFERENCIA
+FROM jobs
+WHERE max_salary BETWEEN 10000 AND 20000;
+
+/*8. Mostrar first_name, salary y redondear el salario a millares de todos los empleados*/
+SELECT first_name, salary, ROUND(salary, -3)
+FROM employees;
+
+/*9. Mostrar los detalles de los jobs en orden descendente por title*/
+SELECT *
+FROM jobs
+ORDER BY job_title;
+
+/*10. Mostrar el nombre completo de los empleados cuyo first_name o last_name comience con S*/
+SELECT first_name || ' ' || last_name AS NOMBRE
+FROM employees
+WHERE first_name LIKE 'S%' OR last_name LIKE 'S%';
+
+/*11. Mostrar los datos de los empleados que igresaron durante el mes de mayo*/
+SELECT *
+FROM employees
+WHERE TO_CHAR(hire_date, 'MON') = 'MAY';
+
+/*12. Mostrar los datos de los empleados cuyo commission_pct es nulo, tienen un salario en el rango de
+5000 y 10000 y su departamento es 30*/
+SELECT *
+FROM employees
+WHERE commission_pct IS NULL
+AND salary BETWEEN 5000 AND 10000
+AND department_id = 30;
+
+/*13. Mostrar first_name, fecha de ingreso y el primer dia del siguiente mes a la fecha de ingreso de los empleados*/
+SELECT first_name, hire_date, LAST_DAY(hire_date) + 1
+FROM employees;
+
+/*14. Mostrar first_name y anyos de experiencia de los empleados*/
+SELECT first_name, hire_date, FLOOR((SYSDATE - hire_date) / 365.25) AS EXPERIENCIA
+FROM employees;
+
+/*15. Mostrar first_name de los empleados que ingresaron durante el anyo 2001*/
+SELECT first_name
+FROM employees
+WHERE TO_CHAR(hire_date, 'YYYY') = '2001';
+
+/*16. Mostrar first_name, last_name despues de convertir la primera letra de cada uno a mayuscula y el resto a minuscula*/
+SELECT INITCAP(first_name), INITCAP(last_name)
+FROM employees;
+
+/*17. Mostrar la primera palabra de cada job_title*/
+SELECT job_title, SUBSTR(job_title, 1, INSTR(job_title, ' ') -1)
+FROM jobs;
+
+/*18. Mostrar la longitud de first_name de los empleados si
+el las_name contiene el caracter 'b' despues de la a posicion*/
+SELECT first_name, last_name, LENGTH(first_name)
+FROM employees
+WHERE INSTR(last_name, 'b')> 3;
+
+/*19. Mostar first_name en mayusculas, last_name en minusculas
+para los empleados cuya primera letra de first_name sea distinta 
+de la primera letra de last_name*/
+SELECT UPPER(first_name), LOWER(last_name)
+FROM employees
+WHERE SUBSTR(first_name, 1, 1) <> SUBSTR(last_name, 1, 1);
+
+/*20. Mostrar datos de los empleados que han ingresado este anyo*/
+SELECT * 
+FROM employees
+WHERE TO_CHAR(hire_date, 'YYYY') = '2008'; --TO_CHAR(SYSDATE, 'YYYY');
+
+/*21. Mostrar el numero de dias entre la fecha actual y el 1 de enero de 2011*/
+SELECT SYSDATE - TO_DATE('01-JAN-2011')
+FROM dual;
+
+
+
+-- GROUP BY
+
+
+/*22. Mostrar cuantos empleados por cada mes del anyo actual
+han ingresado a la compania*/
+-- Por anyo. SELECT COUNT(*), TO_CHAR(hire_date, 'YYYY') AS ANYO
+SELECT COUNT(*), TO_CHAR(hire_date, 'MM') AS MES
+FROM employees
+WHERE TO_CHAR(hire_date, 'YYYY') = '2008' --TO_CHAR(SYSDATE, 'YYYY')
+GROUP BY TO_CHAR(hire_date, 'MM')
+ORDER BY 2;
+
+/*23. Mostrar el manager_id y cuantos empleados tiene a su cargo*/
+SELECT manager_id, COUNT(*)
+FROM employees
+GROUP BY manager_id;
+
+/*24. Mostrar el employee_id y la fecha en que termino su puesto anterior(end_date)*/
+SELECT employee_id, COUNT(*)--MAX(end_date)
+FROM job_history
+GROUP BY employee_id;
+
+/*25. Mostrar la cantidad de empleados que ingresaron en un dia de mes mayor a 15*/
+SELECT COUNT(*)--, TO_CHAR(hire_date, 'DD')
+FROM employees
+WHERE TO_CHAR(hire_date, 'DD') > 15;
+--GROUP BY TO_CHAR(hire_date, 'DD');
+
+/*26. Mostrar el country_id y el numero de ciudades que hay en ese pais*/
+SELECT country_id, COUNT(*)
+FROM locations
+GROUP BY country_id;
+
+/*27. Mostrar el promedio de salario de los empleados por departamento que tengan
+asignado un porcentaje de comision*/
+
+SELECT department_id, ROUND(AVG(salary))
+FROM employees
+WHERE commission_pct IS NOT NULL
+GROUP BY department_id;
+
+/*28. Mostrar job_id, numero de empleados, suma de salarios y diferencia del mayor
+y el menor salario por puesto(job_id)*/
+SELECT job_id, COUNT(*), SUM(salary), MAX(salary) - MIN(salary) AS DIFERENCIA
+FROM employees
+GROUP BY job_id;
+
+/*29. Mostrar el job_id y el promedio de salario para los puestos con promedio
+de salario mayor a 10000*/
+SELECT job_id, AVG(salary)
+FROM employees
+GROUP BY job_id
+HAVING AVG(salary) > 10000;
+
+/*30. Mostrar los anyos e que ingresaron mas de 10 empleados*/
+SELECT TO_CHAR(hire_date, 'YYYY')
+FROM employees
+GROUP BY TO_CHAR(hire_date, 'YYYY')
+HAVING COUNT(employee_id) > 10;
+
+/*31. Mostrar los departamentos en los cuales mas de 5 empleados tengan porcentaje de comision*/
+SELECT department_id
+FROM employees
+WHERE commission_pct IS NOT NULL
+GROUP BY department_id
+HAVING COUNT(commission_pct) > 5;
+
+/*32. Mostar el employee_id de los empleados que tuvieron mas de un puesto
+en la compania*/
+SELECT employee_id
+FROM job_history
+GROUP BY employee_id
+HAVING COUNT(job_id) > 1;
+
+/*33. Mostar el job_id de los puestos que fueron ocupados por mas de tres
+empleados que hayn trabajado mas de 100 dia*/
+SELECT job_id
+FROM job_history
+WHERE end_date - start_date > 100
+GROUP BY job_id;
+--HAVING COUNT(*) > 3;
+
+/*34. Mostrar por departamento y anyo la cantidad de empleados que ingresaron*/
+SELECT department_id, TO_CHAR(hire_date, 'YYYY'), COUNT(*)
+FROM employees
+GROUP BY department_id, TO_CHAR(hire_date, 'YYYY')
+ORDER BY department_id;
+
+/*35. Mostrar los department_id de los departamentos que tienen managers que
+tienen a cargo mas de 5 empleados*/
+SELECT DISTINCT department_id
+FROM employees
+GROUP BY department_id, manager_id
+HAVING COUNT(*) > 5;
+
+
+
+-- EJERCICIOS SENTENCIAS DML
+
+-- Crear tablas de prueba para no afectar el estado de la base de datos original,
+-- Tambien se puede hacer con rollbacks
+-- Una buena practica es hacer select para asegurar que es el dato que queremos eliminar
+
+CREATE TABLE employees2 AS
+SELECT * FROM employees;
+
+CREATE TABLE departments2 AS
+SELECT * FROM departments;
+
+/*36. Cambiar el salario del empleado 115 a 8000 si el salario existente es 
+menor que 6000*/
+SELECT employee_id, salary
+FROM employees2
+WHERE employee_id = 115
+AND salary < 6000;
+
+UPDATE employees2
+SET salary = 8000
+WHERE employee_id = 115
+AND salary < 6000;
+
+/*37. Insertar un nuevo empleado con todos los campos.*/
+INSERT INTO employees2(employee_id, first_name, last_name, email, phone_number,
+    hire_date, job_id, salary, commission_pct, manager_id, department_id)
+VALUES(300, 'ANGELA', 'SYNDER', 'angela@domain.com', '55 432 432',
+    SYSDATE, 'IT_PROG', 10000, NULL, 107, 40);
+
+SELECT * FROM employees2 WHERE employee_id = 300;
+
+/*38. Borrar el departamento 20*/
+SELECT * FROM departments2
+WHERE department_id = 20;
+
+DELETE FROM departments2
+WHERE department_id = 20;
+
+-- Error de integridad no permite borrar cuando se esta usando en otra tabla, primero borrar los datos de la tabla "hija"
+
+/*39. Cambiar el job_id del empleado 110 a IT_PROG si el empleado pertenece al
+departamento 10 y el job_id existente no empieza con 'IT'*/
+SELECT job_id
+FROM employees2
+WHERE employee_id = 100
+AND department_id = 10
+AND NOT job_id LIKE 'IT%';
+
+UPDATE employees2
+SET job_id = 'IT_PROG'
+WHERE employee_id = 100
+AND department_id = 10
+AND NOT job_id LIKE 'IT%';
+
+/*40. Insertar una fila en la tabla de departamentos con manager id 120 y
+location id en cualquier ciudad de Tokyo*/
+DESCRIBE departments2;
+INSERT INTO departments2 VALUES(300, 'SPORTS', 120, 1200);
+
+
+
+-- EJERCICIOS JOIN
+
+/*41. Mostrar el nombre del departamento y el numero de empleados en cada uno*/
+SELECT department_name, COUNT(*)
+FROM departments
+NATURAL JOIN employees
+GROUP BY department_name;
+
+/*42. Mostrar job_title, employee_id y numero de dias d diferencia entre end_date
+y start_date para los jobs del departamento 30, de la tabla job_history*/
+SELECT job_title, employee_id, end_date - start_date AS DAYS
+FROM job_history
+NATURAL JOIN jobs
+WHERE department_id = 20; --30 no tiene info
+
+/*43. Mostrar el nombre del departamento y el nombre del manager a cargo
+del departamento*/
+SELECT department_name, first_name
+FROM departments
+JOIN employees ON (departments.manager_id = employees.employee_id);
+
+/*44. Mostrar el nombre del departamento, el del manager a cargo y la ciudad
+a la que pertenece*/
+SELECT department_name, first_name, city
+FROM departments
+JOIN employees ON(departments.manager_id = employees.employee_id)
+--JOIN locations USING(location_id);
+JOIN locations ON(departments.location_id = locations.location_id)
+--ordenado por department_id
+ORDER BY departments.department_id;
+
+/*45. Mostrar nombre de departamento, y su pais*/
+SELECT department_name, country_name
+FROM departments
+NATURAL JOIN locations
+NATURAL JOIN countries;
+
+/*46. Mostrar job_title, department_name, last_name de empleado y
+fecha de inicio de todos los puestos de 2000 a 2005*/
+SELECT job_title, department_name, last_name, start_date
+FROM job_history
+JOIN jobs USING(job_id)
+JOIN departments USING(department_id)
+JOIN employees USING(employee_id)
+WHERE TO_CHAR(start_date, 'YYYY') BETWEEN 2000 AND 2005;
+
+/*47. Mostrar job_title y promedio de los salarios de los empleados*/
+SELECT job_title, AVG(salary)
+FROM employees
+NATURAL JOIN jobs
+GROUP BY job_title;
+
+/*48. Mostrar job_title, first_name de empleado, y la diferencia entre el
+salary mayor y el menor para el puesto del empleado*/
+SELECT job_title, first_name, max_salary - salary AS DIFERENCIA
+FROM employees
+NATURAL JOIN jobs;
+
+/*49. Mostrar last_name, job_title de los empleados que tienen un commision_pct
+y pertenecen al departamento 30*/
+SELECT last_name, job_title
+FROM employees NATURAL JOIN jobs
+WHERE commission_pct IS NOT NULL AND department_id = 80;
+
+/*50. Mostrar los detalles de los puestos ocupados por cualquier empleado
+que actualmente tenga mas de 15000 de salario*/
+SELECT jh.*
+FROM job_history jh
+JOIN employees e ON(jh.employee_id = e.employee_id)
+WHERE salary > 15000;
+
+/*51. Mostrar departmen_name, nombre y salario de los managers con experiencia mayor a 5 anyos*/
+SELECT department_name, first_name, salary
+FROM employees
+JOIN departments ON (employees.employee_id = departments.manager_id)
+WHERE FLOOR((SYSDATE - hire_date) / 365.25) > 5;
+
+/*52. Mostrar nombre de los empleados que ingresaron antes que su manager*/
+SELECT e1.first_name
+FROM employees e1 JOIN employees e2 ON (e1.manager_id = e2.employee_id)
+WHERE e1.hire_date < e2.hire_date;
+
+

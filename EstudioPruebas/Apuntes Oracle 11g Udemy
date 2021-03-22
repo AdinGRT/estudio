@@ -1,0 +1,79 @@
+Apuntes Oracle 11g Curso Udemy
+
+Comandos sqlplus
+
+Logearse como superusuario
+	sqlplus / as sysdba
+
+Acceder al buffer (muestra ultima consulta realizada)
+	L
+
+Con el buffer mostrado se puede guardar a un archivo
+	SAVE myfile
+
+Limpiar pantalla
+	host cls
+
+Editar el archivo que cree
+	EDIT myfile
+
+Traer contenido del archivo al buffer
+	GET myfile
+
+Mostrar buffer con los cambios
+	L
+	li
+
+Modificar datos del buffer
+	C/datoanterior/datonuevo
+
+Guardar archivo reemplazando anterior
+	SAVE myfile REPLACE
+
+Ejecutar contenido de archivo
+	START myfile
+
+Agregar un cambio al final del archivo
+	SAVE myfile APPEND
+
+Otra alternativa a START
+	@myfile
+
+
+CONSULTAS CON DML EN ORACLE SQL
+
+Describir tablas
+	DESCRIBE tabla;
+	DESC tabla;
+
+Poner alias a las tablas. Si se quiere sensibilidad a mayusculas y minusculas escribir el alias entre comillas dobles.
+	SELECT campo AS "Campotal" FROM tabla;
+
+Seleccinar valores que cumplen la condicion de distintos.
+	SELECT DISTINCT campotal FROM tablatal;
+	
+Para realizar operaciones Oracle pide que se especifique una tabla, para eso nos puede servir la tabla "dual" de Oracle.
+	SELECT 3 * 4 FROM dual;
+	SELECT 'Hola mundo' FROM dual; Utilizar comillas simples para mostrar una cadena, esta cadena se muestra en el encabezado de la columna.
+	SELECT SYSDATE FROM dual;
+	SELECT USER FROM dual;
+	SELECT 'Cadena 1 ' || 'otra cadena' FROM dual; Concatenar con el operador doble pipe.
+	Ej. Todo combinado.
+	SELECT ('Usuario: ' || USER || ', el dia de hoy es: ' || SYSDATE) AS "Encabezado" FROM dual;
+	
+	SELECT 'I''m ' || USER FROM dual; Ejemplo para introducir la comilla simple en la cadena, se pone dos veces.
+
+Filtrar con la clausula WHERE.
+	WHERE campo <operador> talcosa; Operadores: Igualdad =, Diferente <>, !=, Mayor, menor y variantes > < >= <=
+	WHERE campo IN (lista de valores); Operador IN igualar a varios valores.
+	Ej. WHERE campo IN (10, 20, 50);
+	
+
+
+SQL DEVELOPER
+
+Atajo para ejecutar consultas
+	Ctrl + Enter 
+
+
+

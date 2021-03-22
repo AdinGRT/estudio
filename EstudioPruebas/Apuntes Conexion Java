@@ -1,0 +1,26 @@
+CREAR CLASE CONEXION
+
+Definir Constantes para conexion JDBC, url, user, password.
+
+Crear metodo del tipo Connection para la conexion.
+
+Crear metodos para cerrar ResultSet, Statement, PreparedStatement, Connection.
+
+Reportar excepciones.
+
+
+PROBAR CREANDO UN OBJETO CONNECTION Y ASIGNARLE EL VALOR QUE RETORNA DEL METODO GETCONNECTION DE LA CLASE CONEXION.
+
+
+CREAR LAS CLASES DEL MODELO
+Definir atributos private, constructores y metodos set, get y toString
+
+
+CREAR CLASES DEL DAO
+
+Definir Constantes que seran las consultas a realizar.
+Crear objetos Connection, Statement, PreparedStatement, ResultSet y Modelos
+
+Crear metodos respectivos a las consultas.
+
+

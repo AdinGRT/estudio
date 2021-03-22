@@ -1,0 +1,26 @@
+<%--Directiva que indica al navegador que es una pagina web --%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%--Expression: redirecciona a la pagina listarLibros.jsp--%>
+<jsp:forward page="listarLibros.jsp"></jsp:forward>
+
+<%--Directiva para embeber otro jsp--%>
+<%@include file="css.jsp"%>
+
+
+CODIGO HTML PARA LLAMAR AL SERVLET DESDE UN FORMULARIO
+<form action="ServletName" method="post">
+</form>
+
+
+
+CODIGO PARA HACER UN LISTADO
+<select name="categoria">
+    <option value="0">Seleccione una categoria</option>
+    <%--Utilizamos Scriplets para insertar codigo de Java puro--%>
+    <% for(Categoria c:CategoriaDao.listar()) { %>
+        <option value="<%=c.getCodigo()%>"> <%=c.getNombre()%> </option>
+    <% } %>
+</select>
+
+

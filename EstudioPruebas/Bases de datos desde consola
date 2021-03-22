@@ -1,0 +1,25 @@
+USO BASES DE DATOS EN CONSOLA
+
+MySQL
+ENTRAR A LINEA DE COMANDOS: sudo mysql -u root -p
+MOSTRAR BASES DE DATOS: show databases;
+CREAR BASE DE DATOS: create database nombre_bd;
+USAR BASE DE DATOS: use nombre_bd;
+CREAR TABLA: create table nombre_tabla (campo1 tipo(), campoN tipo());
+ELIMINAR TABLA: drop table nombre_tabla;
+ELIMINAR BASE DE DATOS: drop database nombre_bd;
+SALIR LINEA DE COMANDOS: exit o quit;
+
+create table persona (id_persona int not null auto_increment, nombre varchar(45) null, apellido varchar(45) null, email varchar(45) null, telefono varchar(45) null, primary key(id_persona));
+
+
+DML:
+select * from nombre_tabla;
+insert into nombre_tabla (campo1, campo2) values ("valor1", "valor2");
+delete from nombre_tabla where campo1 = "valor1";
+
+
+PostgreSQL
+INGRESAR sudo -u postgres psql
+CREAR USUARIO sudo -u postgres createuser --interactive
+CREAR BASE DE DATOS sudo -u postgres createdb (nombre)

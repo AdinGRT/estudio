@@ -1,0 +1,49 @@
+Apuntes ORACLE SQL
+
+Oracle es en si una base de datos que se divide en table spaces, estan manejados por usuarios especificos, se recomienda que un usuario maneje una table space, dentro de la table space se pueden manejar las tablas de la base de datos.
+
+Comandos:
+1. Iniciar linea de comandos de Oracle
+   sqlplus
+   
+2. Indicar usuario y contrasenya.
+   system	Es el usuario por defecto
+   3005 	Contrasenya que se ingreso al instalar Oracle
+
+3. En la consola SQL crear table space
+   create tablespace tbs_nombretal datafile 'ruta/nombretal.dfb' size 100m; tamanyo en mb
+   Ej.
+   create tablespace tbs_prueba datafile '/home/adingrt/BasesDeDatosOracle/bd_prueba/tbs_prueba.dbf' size 100m;
+   
+4. Crear usuario con contrasenya con table space.
+   create user usuariotal identified by 1234 default tablespace tbs_nombretal;
+   Ej.
+   create user usrprueba identified by 1234 default tablespace tbs_prueba;
+
+5. Dar permisos al usuario creado.
+   grant connect , resource to usuariotal;
+   grant create table to usuariotal; Permite crear tablas.
+   grant create view to usuariotal; Permite ver tablas.
+
+6. Comando para ver tablas del usuariotal conectado.
+   SELECT * FROM TABS;
+   SELECT * FROM TAB;
+
+7. Conectarse con otro usuario.
+   connect
+   user and password
+
+
+PROBAR CONEXION EN ORACLE SQL DEVELOPER
+
+PASOS PARA CONECTAR CON NETBEANS
+1. Descargar driver de conexion.
+2. Mover el driver al folder de los proyectos.
+3. En NetBeans agregar libraries "Add JAR/Folder"
+4. En Services/Databases crear nueva conexion.
+5. Seleccionar Driver Oracle Thin
+6. Seleccionar la ruta donde esta el archivo del driver.
+7. Llenar con el usuario y probar.
+8. Escoger scheme
+9. Poner nombre a la conexion.
+
