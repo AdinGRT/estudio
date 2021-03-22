@@ -24,3 +24,7 @@ CODIGO PARA HACER UN LISTADO
 </select>
 
 
+CODIGO PARA RECIBIR RESPUESTA DEL SERVLET EN EL JSP
+
+<%=(request.getAttribute("mensaje")!=null?request.getAttribute("mensaje"):"")%>
+
