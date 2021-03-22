@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>002 Por qué utilizar JSP</title>
+</head>
+<body>
+<div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p>JavaServer Pages sirve con el mismo propósito que los programas implementados mediante el Common Gateway Interface (CGI) . </p>
+
+<p>Pero JSP ofrecen varias ventajas en comparación con el CGI.</p>
+
+<ul><li><p>El rendimiento es significativamente mejor porque JSP permite la incrustación de elementos dinámicos en sí misma páginas HTML en lugar de tener un archivos CGI separadas.</p></li><li><p>JSP siempre se compilan antes de ser procesado por el servidor a diferencia de CGI / Perl que requiere el servidor para cargar un intérprete y el guión de destino cada vez que se solicita la página.</p></li><li><p>JavaServer Pages se construyen en la parte superior de la API de servlets Java, así como servlets, JSP también tiene acceso a todas las potentes API Java de la empresa, incluyendo JDBC, JNDI, EJB, JAXP etc.</p></li><li><p>Las páginas JSP se pueden utilizar en combinación con los servlets que manejan la lógica de negocio, el modelo apoyado por los motores de plantilla de servlets Java.</p></li></ul>
+
+
+
+
+
+<p>Por último, JSP es una parte integral de J2EE, una plataforma completa para aplicaciones de clase empresarial. Esto significa que JSP puede desempeñar un papel en las aplicaciones más sencillas hasta las más complejas y exigentes.</p>
+
+
+
+<p><br></p>
+
+
+
+<h4>Procesamiento de JSP:</h4>
+
+
+
+
+
+<p>Los siguientes pasos explican cómo el servidor web crea la página web utilizando JSP:</p><p><img alt="Procesamiento de JSP" src="http://www.w3ii.com/jsp/jsp-processing.jpg" style="margin: 20px auto;"><br></p>
+
+
+
+
+
+<ul><li><p>Al igual que con una página normal, el navegador envía una petición HTTP al servidor web.</p></li><li><p>El servidor web reconoce que la petición HTTP es para una página JSP y los envía a un motor JSP. Esto se hace mediante el uso de la página JSP o URL que termina con <strong>.jsp en lugar de .html.</strong></p></li><li><p>El motor JSP carga la página JSP desde el disco y lo convierte en un contenido servlet. Esta conversión es muy sencillo en el que todo texto de la plantilla se convierte en println( ) declaraciones y todos los elementos JSP se convierten a código Java que implementa el comportamiento dinámico correspondiente de la página.</p></li><li><p>El motor JSP se compila el servlet en una clase ejecutable y reenvía la petición original a un motor de servlets.</p></li><li><p>Una parte del servidor web llamado el motor de servlets carga la clase servlet y lo ejecuta. Durante la ejecución, el servlet produce una salida en formato HTML, que el motor servlet pasa al servidor web dentro de una respuesta HTTP.</p></li><li><p>El servidor web envía la respuesta HTTP para su navegador en términos de contenido HTML estático.</p></li><li><p>Por último navegador web se encarga de la página HTML generado dinámicamente dentro de la respuesta HTTP exactamente como si se tratara de una página estática.</p></li></ul>
+
+
+
+
+
+<p>Todos los pasos anteriormente mencionados se pueden muestran a continuación en el siguiente diagrama:</p>
+
+
+
+
+
+<p><br></p>
+
+
+
+<p><br></p>
+
+
+
+<p><br></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>022 Conceptos previos sobre los servlet</title>
+</head>
+<body>
+<div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p>Los parámetros son valores enviados por el metodo post o get al servidor Http. Por ejemplo en una típica pantalla de login necesitamos enviar el usuario y la clave al servidor para que la valide, si el formulario html es como el siguiente:</p><figure><img src="https://udemy-images.s3.amazonaws.com:443/redactor/raw/2017-09-26_12-49-56-173e1918539a422ec77f8c440d0b588a.png"></figure><p><br></p><pre class="prettyprint linenums">&lt;html&gt;
+&lt;body&gt;
+&lt;h3&gt;Entrar en el sistema&lt;/h3&gt;
+	&lt;form action="login" method="post"&gt;
+		&lt;table&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Usuario:&lt;/td&gt;
+				&lt;td&gt;&lt;input name="nombre_usuario" /&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Contraseña:&lt;/td&gt;
+				&lt;td&gt;&lt;input name="clave" /&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+		&lt;/table&gt;
+		&lt;input type="submit" value="Entrar" /&gt;
+	&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre><p>Los valores se recibirían así:</p><pre class="prettyprint linenums">String usuario = request.getParameter("nombre_usuario");
+String clave = request.getParameter("clave");</pre><h4></h4><h4>RequestDispatcher</h4><p>Un servlet/JSP puede invocar de modo directo a un recurso de la web. La idea es poder reenviar la petición (request) a dicho recurso. Para hacer esto necesitamos un RequestDispatcher, que es un referencia que encapsula el recurso. En el siguiente ejemplo el servlet tiene como "dispatcher" otro servlet (context es un ServletContext que se obtiene en init()):</p><p><br> RequestDispatcher dispatcher = context.getRequestDispatcher("otraRuta.jsp");</p>
+
+<p>La creación del dispatcher se podría escribir de otra forma:<br> <strong><em><strong>RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("otraRuta.jsp");</strong></em></strong></p>
+
+<p>Pero se puede observar que este método en ocasiones falla y la documentación de Sun recomienda la primera forma: context.getRequestDispatcher(arg). </p><p>El argumento es la ruta del recurso, y es interpretado como relativo al contexto actual. Conviene usar getContext() para obtener un RequestDispatcher de recursos en contextos externos. </p><p>getRequestDispatcher(arg) retorna null si el ServletContext no puede retornar un RequestDispatcher.<br>La invocación al recurso se puede hacer de dos formas:<br>● Incluir el recurso en el flujo de salida. La salida de "<strong><em>otraRuta.jsp</em></strong>" se incluye en la salida del primer servlet o recurso.<br> dispatcher.include(request, response);</p>
+
+<p>● Redirigir (forward) la petición al recurso. Funcionalmente semejante a sendRedirect(). Se trata de redirigir la petición a otro componente:<br> dispatcher.forward(request, response);</p>
+
+<p>La diferencia entre sendRedirect() y forward() (o también include()) es:<br>❍ En sendRedirect() la petición acaba bajo el control del segundo servlet o recurso. La URL que se puede ver en el<br>navegador es la del segundo servlet o recurso.<br>❍ En forward() o include() la petición se controla por el primer servlet. La URL que se puede ver en el<br>navegador es la del primer servlet o recurso. </p><br>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
