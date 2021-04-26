@@ -1,0 +1,225 @@
+ARCHIVOS EN JAVA:
+
+Non-Blocking I/O: No bloquear el tread.
+
+JAVA I/O
+
+File file = new File("/home/adingrt/IdeaProjects/plantilla.txt") {
+
+try (FileWriter fw = new FileWriter(file)) {
+	file.createNewFile();
+	
+	fw.append("1. Steguen\n");
+	fw.append("2. Busquets\n");
+} catch (IOException e) {
+	System.out.println("Error de escritura" + e);
+}
+
+
+// Leer archivo con escaner
+
+File file = new File("/home/adingrt/IdeaProjects/plantilla.txt");
+
+try (Scanner sc = new Scanner(file)) {
+
+	while(sc.hasNext()) {
+	
+		String line = sc.nextLine();
+		System.out.println(line);
+	}
+}
+
+// Buena practica para las rutas
+FIle.separator
+
+
+JAVA NI/O
+
+Path archivo = Paths.get("/home/adingrt/IdeaProjects/plantilla.txt");
+
+if(!Files.exists(archivo)) {
+	Files.createFile(archivo);
+	
+	Path nuevoArchivo = Paths.get("/home/adingrt/IdeaProjects/plantillaCopia.txt");
+	
+	Files.copy(archivo, nuevoArchivo);
+	
+	
+	Files.writeString(archivo, "String");
+	
+	List<String> lines = Files.readAllLines(archivo); //Devuelve lista de lineas
+	
+	for (String line : lines) {
+		System.out.println(line);
+	}
+		
+}
+
+
+// Metodos File: .move .delete .deleteIfExists
+// Files.createDirectories(dir); crea subdirectorios
+
+
+// MAS COMPLEJO
+// CHANNELS Y BUFFERS
+
+
+PARAMETRIZAR APLICACION
+
+Crear archivo properties
+
+Ej. application.properties
+
+Guardarlo en src/main/resources
+
+Para recuperarlo crear clase Java
+
+ResourceBundel resourceBundle = ResourceBundle.genBundle("application"); no hace falta ponerle la extencion
+
+String appName = resourceBundle.getString("app.name");
+
+//Comentarios con # en el properties
+
+
+CALANDERIZACION
+
+FORMA ANTIGUA DE FECHAS
+
+DATE date = new Date();
+Calendar calendar = Calendar.getInstance();
+
+
+ACTUAL
+
+LocalDate localDate = LocalDate.now();
+
+PERIODO ENTRE FECHAS Y DIFERENCIA DE FECHAS
+
+Period perios = Period.between(LocalDate.now(), LocalDate.now().pluMonths(6));
+Duration duration = Duration.between(startTime, endTime);
+sout(duration.elMetodo());
+
+
+
+
+COLECCIONES
+
+ArrayList permite repetidos Set no.
+
+
+
+
+List<E> listaTal = new ArrayList<>();
+	.add(); agregar
+	.remove(); eliminar
+	.get(); obtener
+
+Set<E> setTal = new HashSet<>();
+	.add(); agregar
+
+Map<clave, valor> mapaTal = new HasMap<>(); //No repite sus claves
+	.put(); agregar
+	.get(); recuperar a partir de la clave o el valor;
+	//Metodos para recorrer
+	.keySet(); devuelve set de todas las claves
+	
+
+
+TreeSet permite trabajar listas ordenadas
+
+Set<String> ciudades = new TreeSet<>();
+	.add(); agregar
+	//Al recorrerlo devuelve valores en orden, alfabetico si son strings numericamente si son integer.
+	
+// Para ordenar un objeto por medio de los TreeSet se debe implementar la interfaz Comparable e implementar el metodo de acuerdo a un criterio de ordenamiento.
+
+
+COLA:
+
+Queue<E> talCola = new LinkedList<>();
+	.offer(); agregar
+	.peek(); ver al primero en la cola
+	.poll(); ver y quitar
+	Iterar usando while(!talCola.isEmpty()){}
+	//Seran eliminados los datos.
+	
+STACK:
+
+LinkedList<E> talLista = new LinkedList<>();
+	.pollLast(); Ver y quitar el ultimo en llegar
+
+Tambien se puede usar
+
+Dequeu<E> talPila = new LinkedList<>();
+
+COLA CON PRIORIDAD
+
+Queue<E> talCola = new PriorityQueue<>();
+
+Se le debe proporcionar un objeto que implemente la interfaz comparator que sigue la misma politica de comparable negativo es primero positivo es de ultimo.
+
+
+
+
+ESTO ES DE INLEARNING
+
+NUMEROS ALEATORIOS:
+
+double miDouble = Math.random();
+//Genera numeros entre 0 y 1;
+
+double mi Double2 = Math.random(Math.random() * ((max - min) + 1)) + min)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
